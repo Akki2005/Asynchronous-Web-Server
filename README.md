@@ -1,9 +1,11 @@
 # Asynchronous-Web-Server
 
 Introduction
+
 This report outlines the implementation of a simple TCP server that checks whether a given input string is a palindrome. A palindrome is defined as a string that reads the same forwards and backwards. The server uses the HTTP protocol to communicate with clients, processing incoming requests and returning responses based on the evaluation of the input.
 
 System Architecture
+
 The server is built using the C programming language and employs socket programming to establish network communication. It listens for incoming TCP connections on a specified port and processes client requests in a loop. The architecture consists of the following components:
 
 Socket Initialization: server_socket = socket(AF_INET, SOCK_STREAM, 0); This line creates a TCP socket using the socket() function. The parameters specify the address family (IPv4) and the socket type (stream). If the socket creation fails, an error message is printed, and the server exits.
