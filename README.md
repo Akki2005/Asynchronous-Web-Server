@@ -32,6 +32,7 @@ Client Handling:
 
 The server accepts client connections and processes requests in an event-driven manner, allowing for high concurrency.
 Each client request is handled independently, ensuring that multiple clients can interact with the server simultaneously.
+
 Key Keywords
 socket: Creates a socket for communication.
 bind: Associates the socket with a specific address and port.
