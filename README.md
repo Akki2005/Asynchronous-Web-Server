@@ -27,6 +27,9 @@ Generating a Response: Based on the result of the palindrome check, the server c
 
 Sending the Response: The server sends the generated HTTP response back to the client using the write() function, ensuring that the client receives feedback regarding their input.
 
+Performance Analysis
+The use of epoll enables the server to efficiently handle thousands of concurrent connections, as it only reacts to active sockets, thus minimizing CPU usage. This non-blocking I/O model allows the server to maintain responsiveness and manage high throughput under load.
+
 Conclusion
 This TCP server demonstrates a straightforward application of socket programming and HTTP request handling in C. It efficiently processes client connections and checks for palindrome strings, providing immediate feedback through HTTP responses. The design can serve as a foundation for more complex applications involving string processing and network communication.
 OUTPUT
