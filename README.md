@@ -1,5 +1,3 @@
-![Screenshot 2024-10-12 105209](https://github.com/user-attachments/assets/4b487887-f2ef-41f6-8660-73bb5714d397)
-![Screenshot 2024-10-12 105157](https://github.com/user-attachments/assets/dec0523e-59b0-45ad-bdb3-9a9c74eca190)
 # Asynchronous-Web-Server
 
 Socket Programming:
@@ -46,3 +44,9 @@ malloc: Allocates memory for data storage.
 strstr: Searches for a substring within a string.
 snprintf: Formats a string for the HTTP response.
 io_uring: Manages asynchronous I/O operations efficiently.
+OUTPUT :
+Server :
+![Screenshot 2024-10-12 105145](https://github.com/user-attachments/assets/9fe25ba0-769f-4696-9ec4-bb3529f05f37)
+Client :
+![Screenshot 2024-10-12 105209](https://github.com/user-attachments/assets/86843edc-725e-496b-b1df-1dcd3e870b80)
+
