@@ -28,6 +28,7 @@ Generating a Response: snprintf(response, sizeof(response), "HTTP/1.1 200 OK\r\n
 Sending the Response: write(client_socket, response, strlen(response)); The server sends the generated HTTP response back to the client using the write() function, ensuring that the client receives feedback regarding their input.
 
 Performance Analysis
+
 The implementation utilizes epoll to efficiently handle thousands of concurrent connections by reacting only to active sockets. This non-blocking I/O model minimizes CPU usage, allowing the server to maintain responsiveness and manage high throughput under load.
 
 
