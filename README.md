@@ -1,52 +1,34 @@
 # Asynchronous-Web-Server
 
-Socket Programming:
+Introduction
+This report outlines the implementation of a simple TCP server that checks whether a given input string is a palindrome. A palindrome is defined as a string that reads the same forwards and backwards. The server uses the HTTP protocol to communicate with clients, processing incoming requests and returning responses based on the evaluation of the input.
 
-Sockets are endpoints for sending and receiving data across a network.
-The server uses TCP sockets to listen for incoming connections on a specified port (8080).
-Asynchronous I/O:
+System Architecture
+The server is built using the C programming language and leverages socket programming to establish communication over the network. It listens for incoming TCP connections on a specified port and processes client requests in a loop. The server's architecture consists of the following components:
 
-Utilizes liburing, a library for efficient asynchronous I/O operations.
-Allows the server to handle multiple client connections without blocking, improving performance.
-HTTP Protocol:
+Socket Initialization: The server creates a TCP socket using the socket() function. It specifies the address family (IPv4) and the socket type (stream).
 
-The server implements a simple HTTP response structure, recognizing HTTP requests and sending back formatted responses.
-The response includes status codes (e.g., 200 OK), content type, and content length.
-Memory Management:
+Binding to an Address: The server binds the socket to an IP address and port number using the bind() function. This allows the server to listen for connections directed to that specific port.
 
-Dynamic memory allocation (malloc()) is used for creating a buffer to store incoming request data.
-It's essential to manage memory properly to avoid leaks, especially in a server environment where requests can be numerous.
-String Manipulation:
+Listening for Connections: The listen() function is called to mark the socket as passive, allowing it to accept incoming connections. The server can queue a specified number of pending connections.
 
-The code uses functions like strstr() to locate the end of HTTP headers.
-Processes incoming data by checking for the end of headers and adjusting the data length accordingly.
-Error Handling:
+Accepting Connections: The server enters an infinite loop, where it waits for client connections using the accept() function. Upon accepting a connection, it creates a new socket dedicated to that client.
 
-The server checks for errors at each step, such as socket creation, binding, and listening, ensuring robust operation.
-Proper error handling prevents crashes and provides meaningful feedback.
-HTTP Response Construction:
+Request Handling
+Upon receiving a connection, the server reads the client's HTTP request. The handling process involves the following steps:
 
-Constructs the HTTP response based on the received data, indicating what was processed (in this case, checking if the input is a palindrome).
-The response format follows the HTTP specification, ensuring clients can interpret it correctly.
-Client Handling:
+Data Reception: The server reads the incoming data from the client socket into a buffer, ensuring the buffer is null-terminated for proper string handling.
 
-The server accepts client connections and processes requests in an event-driven manner, allowing for high concurrency.
-Each client request is handled independently, ensuring that multiple clients can interact with the server simultaneously.
+Request Parsing: The server parses the received HTTP request to extract the body content, which contains the string to be checked for palindrome properties.
 
-Key Keywords
-socket: Creates a socket for communication.
-bind: Associates the socket with a specific address and port.
-listen: Listens for incoming connections on the socket.
-accept: Accepts a connection from a client.
-send: Sends data to a connected client.
-close: Closes the socket connection.
-malloc: Allocates memory for data storage.
-strstr: Searches for a substring within a string.
-snprintf: Formats a string for the HTTP response.
-io_uring: Manages asynchronous I/O operations efficiently.
-OUTPUT :
-Server :
-![Screenshot 2024-10-12 105145](https://github.com/user-attachments/assets/9fe25ba0-769f-4696-9ec4-bb3529f05f37)
-Client :
-![Screenshot 2024-10-12 105209](https://github.com/user-attachments/assets/86843edc-725e-496b-b1df-1dcd3e870b80)
+Palindrome Checking: The extracted body is passed to the is_palindrome() function, which iterates through the string to determine if it reads the same forwards and backwards. This function returns a boolean indicating whether the string is a palindrome.
+
+Generating a Response: Based on the result of the palindrome check, the server constructs an HTTP response message. If the string is a palindrome, it responds with "The input is a palindrome." Otherwise, it responds with "The input is not a palindrome."
+
+Sending the Response: The server sends the generated HTTP response back to the client using the write() function, ensuring that the client receives feedback regarding their input.
+
+Conclusion
+This TCP server demonstrates a straightforward application of socket programming and HTTP request handling in C. It efficiently processes client connections and checks for palindrome strings, providing immediate feedback through HTTP responses. The design can serve as a foundation for more complex applications involving string processing and network communication.
+OUTPUT
+![Screenshot 2024-10-12 231153](https://github.com/user-attachments/assets/8a87d5ad-226e-45aa-a345-a7f327d58990)
 
