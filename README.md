@@ -34,16 +34,27 @@ The server accepts client connections and processes requests in an event-driven 
 Each client request is handled independently, ensuring that multiple clients can interact with the server simultaneously.
 
 Key Keywords
+
 socket: Creates a socket for communication.
+
 bind: Associates the socket with a specific address and port.
+
 listen: Listens for incoming connections on the socket.
+
 accept: Accepts a connection from a client.
+
 send: Sends data to a connected client.
+
 close: Closes the socket connection.
+
 malloc: Allocates memory for data storage.
+
 strstr: Searches for a substring within a string.
+
 snprintf: Formats a string for the HTTP response.
+
 io_uring: Manages asynchronous I/O operations efficiently.
+
 OUTPUT :
 Server :
 ![Screenshot 2024-10-12 105145](https://github.com/user-attachments/assets/9fe25ba0-769f-4696-9ec4-bb3529f05f37)
