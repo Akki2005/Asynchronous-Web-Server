@@ -16,10 +16,10 @@ int is_palindrome(const char *str) {
     int len = strlen(str);
     for (int i = 0; i < len / 2; i++) {
         if (str[i] != str[len - i - 1]) {
-            return 0; // Not a palindrome
+            return 0; 
         }
     }
-    return 1; // Is a palindrome
+    return 1; 
 }
 
 void handle_connection(int client_socket) {
@@ -32,7 +32,7 @@ void handle_connection(int client_socket) {
         // Simple parsing logic to extract the body
         char *body = strstr(buffer, "\r\n\r\n");
         if (body) {
-            body += 4; // Move past the headers
+            body += 4; 
             
             // Check if the body has data
             if (strlen(body) > 0) {
@@ -49,7 +49,7 @@ void handle_connection(int client_socket) {
             }
         }
     }
-    close(client_socket); // Close the connection
+    close(client_socket); 
 }
 
 int main() {
