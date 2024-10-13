@@ -26,8 +26,8 @@ void handle_connection(int client_socket) {
     char buffer[BUFFER_SIZE];
     int bytes_read = read(client_socket, buffer, sizeof(buffer) - 1);
     if (bytes_read > 0) {
-        buffer[bytes_read] = '\0'; // Null-terminate the string
-        printf("Received data: %s\n", buffer); // Print the received data
+        buffer[bytes_read] = '\0'; 
+        printf("Received data: %s\n", buffer); 
 
         // Simple parsing logic to extract the body
         char *body = strstr(buffer, "\r\n\r\n");
@@ -45,7 +45,7 @@ void handle_connection(int client_socket) {
                 } else {
                     snprintf(response, sizeof(response), "HTTP/1.1 200 OK\r\nContent-Length: 34\r\nContent-Type: text/plain\r\n\r\nThe input is not a palindrome.");
                 }
-                write(client_socket, response, strlen(response)); // Send the response
+                write(client_socket, response, strlen(response)); 
             }
         }
     }
@@ -65,7 +65,7 @@ int main() {
 
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY; // Accept connections from any IP
+    server_addr.sin_addr.s_addr = INADDR_ANY; 
     server_addr.sin_port = htons(PORT);
 
     if (bind(server_socket, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
