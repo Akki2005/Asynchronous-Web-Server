@@ -22,10 +22,10 @@ void process_request(int client_socket, const char *data, ssize_t data_len) {
     const char *end_of_headers = strstr(data, "\r\n\r\n");
     if (end_of_headers) {
         // Move the pointer to the start of the body
-        body = end_of_headers + 4; // Skip past the "\r\n\r\n"
-        data_len = data + data_len - body; // Adjust the length to the body length
+        body = end_of_headers + 4; 
+        data_len = data + data_len - body; 
     } else {
-        data_len = 0; // No body found
+        data_len = 0; 
     }
 
     // Create a proper HTTP response
@@ -36,14 +36,14 @@ void process_request(int client_socket, const char *data, ssize_t data_len) {
              "Content-Length: %zu\r\n"
              "\r\n"
              "Received: %.*s", 
-             data_len + 10, (int)data_len, body); // Include length of "Received: "
+             data_len + 10, (int)data_len, body); 
 
     send_response(client_socket, response);
 }
 
 // Function to handle incoming requests
 void handle_request(struct io_uring *ring, struct io_uring_sqe *sqe, int client_socket) {
-    char *buffer = malloc(BUFFER_SIZE); // Allocate buffer for receiving data
+    char *buffer = malloc(BUFFER_SIZE); 
     if (!buffer) {
         perror("Failed to allocate buffer");
         close(client_socket);
@@ -57,7 +57,7 @@ void handle_request(struct io_uring *ring, struct io_uring_sqe *sqe, int client_
 
     // Set up the read request
     io_uring_prep_recv(sqe, client_socket, buffer, BUFFER_SIZE, 0);
-    sqe->user_data = (unsigned long)buffer; // Store buffer pointer for later use
+    sqe->user_data = (unsigned long)buffer; 
 }
 
 // Function to set up the server
@@ -123,19 +123,19 @@ int main() {
         // Wait for responses
         struct io_uring_cqe *cqe;
         while (io_uring_wait_cqe(&ring, &cqe) == 0) {
-            unsigned long buffer_ptr = cqe->user_data; // Retrieve buffer pointer
-            int socket_fd = client_socket; // Keep client socket
+            unsigned long buffer_ptr = cqe->user_data; 
+            int socket_fd = client_socket; 
 
             if (cqe->res > 0) {
                 // Process the received data
-                char *data = (char *)buffer_ptr; // Use the buffer pointer directly
-                process_request(socket_fd, data, cqe->res); // Send response
+                char *data = (char *)buffer_ptr; 
+                process_request(socket_fd, data, cqe->res); 
             } else {
                 // Handle errors or close the connection
                 close(socket_fd);
             }
             io_uring_cqe_seen(&ring, cqe);
-            free((void *)buffer_ptr); // Free the allocated buffer
+            free((void *)buffer_ptr); 
         }
     }
 
